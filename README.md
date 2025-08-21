@@ -32,4 +32,4 @@ A Netflix-inspired streaming platform built with React, featuring user authentic
 - **Routing**: React Router v6
 - **State Management**: React Context API
 
-## 📁 Project Structure
+

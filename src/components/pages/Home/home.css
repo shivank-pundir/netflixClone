@@ -1,0 +1,137 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 70%);
+  mask-image: linear-gradient(to right, transparent, black 70%);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-caption {
+  position: absolute;
+  width: 100%;
+  padding-left: 6%;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 2; /* ensures it’s above image */
+  margin-bottom: 40px; /* small spacing instead of negative */
+}
+
+.hero-caption p {
+  width: 50%;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #fff;
+}
+
+.caption-img {
+  width: 90%;
+  max-width: 420px;
+  margin-bottom: 30px;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.hero-btns .btn {
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 3; /* make sure always clickable */
+}
+
+.hero-btns .btn img {
+  width: 20px;
+}
+
+/* Light button */
+.hero-btns .btn {
+  background: white;
+  color: #000;
+}
+
+.hero-btns .btn:hover {
+  background: rgb(215, 6, 6);
+  color: #fff;
+}
+
+/* Dark button */
+.hero-btns .btn.dark-btn {
+  color: #fff;
+  background-color: rgba(109, 109, 110, 0.7);
+}
+
+.hero-btns .btn.dark-btn:hover {
+  background: rgba(109, 109, 110, 0.4);
+}
+
+.more-card {
+  padding-left: 6%;
+}
+
+
+@media (max-width: 1024px) {
+  .title-cards{
+    display: none;
+  }
+  
+  .hero-btns {
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 800px){
+    .hero-caption{
+        padding-left: 4%;
+    }
+    .caption-img{
+        width: 40%;
+        margin-bottom: 10px;
+    }
+    .hero-caption p{
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+    .hero-btns .btn img{
+        width: 20px;
+    }
+    .more-card{
+        padding-left: 4%;
+    }
+}
+
+@media (max-width: 800px){
+
+    .caption-img{
+        display: none;
+    }
+    .her-btns .btn img{
+        width: 15px;
+    }
+.hero-btns .btn{
+    padding: 4px 10px;
+    gap: 5px;
+    font-size: 10px;
+}
+
+}

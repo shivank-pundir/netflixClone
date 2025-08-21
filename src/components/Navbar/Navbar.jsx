@@ -1,4 +1,4 @@
-import React, {useEffect, useRef } from 'react';
+import React, {useEffect, useRef, useState } from 'react';
 import "./navbar.css";
 import logo from "../../assests/logo.png";
 import search_icon from "../../assests/search_icon.svg";
@@ -6,10 +6,14 @@ import bell_icon from "../../assests/bell_icon.svg";
 import profile_img from "../../assests/profile_img.png";
 import Drop from "../../assests/drop.svg";
 import { logout } from '../../firebase';
+import { useAuth } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-
   const navRef = useRef();
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
   useEffect(() =>{
      window.addEventListener('scroll', () => {
@@ -21,6 +25,7 @@ const Navbar = () => {
         }
      })
   },[])
+
   return (
     <div className='navbar' ref={navRef}>
       <div className='navbar-left'>
@@ -36,23 +41,34 @@ const Navbar = () => {
       </div>
 
       <div className='navbar-right'>
-        {/* <img src={search_icon} alt="Search" className='icons' /> */}
-        <i class="search ri-search-line"></i>
+        <i className="search ri-search-line"></i>
         <p>Children</p>
-        {/* <img src={bell_icon} alt="Notifications" className='icons' /> */}
-        <i class="notification ri-notification-line"></i>
-        <div className='navbar-profile '>
-          <img src={profile_img} alt="Profile" className='profile' />
-         <i class="ri-expand-up-down-line"></i>
-
-         <div className="dropdown">
-          <p onClick={() => {logout()}}>Sign out of Netflix</p>
-         </div>
-        </div>
-       
+        <i className="notification ri-notification-line"></i>
+        
+        {isAuthenticated ? (
+          <div
+            className='navbar-profile'
+            onMouseEnter={() => setOpen(true)}
+            onMouseLeave={() => setOpen(false)}
+            onClick={() => setOpen((v) => !v)}
+          >
+            <img src={profile_img} alt="Profile" className='profile' />
+            <i className="ri-expand-up-down-line"></i>
+            <div className="dropdown" style={{ display: open ? 'flex' : 'none' }}>
+              <p onClick={() => logout()}>Sign out of Netflix</p>
+            </div>
+          </div>
+        ) : (
+          <div className='navbar-auth'>
+            <button 
+              className="login-btn-nav"
+              onClick={() => navigate('/login')}
+            >
+              Sign In
+            </button>
+          </div>
+        )}
       </div>
-
-       
     </div>
   );
 };

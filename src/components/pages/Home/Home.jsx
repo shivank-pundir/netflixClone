@@ -7,8 +7,11 @@ import play_icon from "../../../assests/play_icon.png";
 import info_icon from "../../../assests/info_icon.png";
 import TitleCards from "../../TitleCards/TitleCards.jsx";
 import Footer from "../../Footer/Footer.jsx";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const Home = () => {
+  const { isAuthenticated } = useAuth();
+
   return (
     <div className="home">
       <Navbar />
@@ -31,20 +34,23 @@ const Home = () => {
             <img src={info_icon} alt="" />
             More Info
           </button>
-          
         </div>
+        {!isAuthenticated && (
+          <div className="login-notice">
+            <p>💡 You can browse freely! Login to watch videos.</p>
+          </div>
+        )}
         <div className="title-cards">
-                  <TitleCards />
-
+          <TitleCards />
         </div>
       </div>
       
-        <div className="more-card">
-          <TitleCards title={"Blockbuster Movies"} category="top_rated" />
-          <TitleCards title={"Only on Netflix"} category="popular" />
-          <TitleCards title={"Upcoming"} category="upcoming" />
-          <TitleCards title={"Top Picks for you"} category="now_playing" />
-        </div>
+      <div className="more-card">
+        <TitleCards title={"Blockbuster Movies"} category="top_rated" />
+        <TitleCards title={"Only on Netflix"} category="popular" />
+        <TitleCards title={"Upcoming"} category="upcoming" />
+        <TitleCards title={"Top Picks for you"} category="now_playing" />
+      </div>
       
       <Footer />
     </div>
